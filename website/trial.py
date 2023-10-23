@@ -27,8 +27,11 @@ if prompt := st.chat_input("What is up?"):
 
     # Display bot message in chat message container
     botmsg = "I'm good, thanks!" # Add your bot response here
-    with st.chat_message(BOT_NAME):
+    with st.chat_message('assistant'):
         st.markdown("I'm good, thanks!")
     
     # Add bot message to chat history
-    st.session_state.messages.append({"role": BOT_NAME, "content": botmsg})
+    st.session_state.messages.append({"role": 'assistant', "content": botmsg})
+
+
+
