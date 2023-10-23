@@ -1,16 +1,34 @@
 import streamlit as st
+import random
+import time
 
-st.title("Streamlit Trial")
-# streamlit chat message
-import streamlit as st
-import numpy as np
+st.title("AlexBot")
 
-with st.chat_message("user"):
-    st.write("BHOSIKA")
-prompt = st.chat_input("Say something")
-if prompt:
-    #chnage colour of the icon
+BOT_NAME = "AlexBot"
 
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# Accept user input
+if prompt := st.chat_input("What is up?"):
+    # Display user message in chat message container
     with st.chat_message("user"):
-        st.write(prompt)
+        st.markdown(prompt)
+
+     # Add user message to chat history   
+    st.session_state.messages.append({"role": "user", "content": prompt})
+
+
+    # Display bot message in chat message container
+    botmsg = "I'm good, thanks!" # Add your bot response here
+    with st.chat_message(BOT_NAME):
+        st.markdown("I'm good, thanks!")
+    
+    # Add bot message to chat history
+    st.session_state.messages.append({"role": BOT_NAME, "content": botmsg})
