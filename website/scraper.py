@@ -105,7 +105,7 @@ def get_all_pages(num_pages,base,product,product_details,reviews,header):
     # product_details['product_description'] = []
     for script in soup.find_all('script', attrs={'id': 'jsonLD'}):
         json_data = json.loads(script.text)
-        print(json_data, json_data[0], end="\n\n\n", sep="\n\n")
+        # print(json_data, json_data[0], end="\n\n\n", sep="\n\n")
         # print(json_data)
         tempdict = {}
         for tmp in json_data:

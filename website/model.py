@@ -1,12 +1,17 @@
 import openai  # for calling the OpenAI API
 
-# openai.api_key = "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"
+
 
 # models
 
 
 
 def get_response(query, context):
+    # if query == "summarize all the reviews":
+    #     return "The product is good"
+    # else:
+    #     return "okay"
+    openai.api_key = "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"
     EMBEDDING_MODEL = "text-embedding-ada-002"
     GPT_MODEL = "gpt-3.5-turbo"
     context = context
