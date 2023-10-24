@@ -11,7 +11,7 @@ def get_response(query, context):
     #     return "The product is good"
     # else:
     #     return "okay"
-    openai.api_key = "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"
+    openai.api_key = "OPENAI_KEY"
     EMBEDDING_MODEL = "text-embedding-ada-002"
     GPT_MODEL = "gpt-3.5-turbo"
     context = context
