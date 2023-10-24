@@ -34,7 +34,7 @@ def send_request_to_model(button):
 
 # Accept user input
 if prompt := st.chat_input("What is up?"):
-    flag = True
+
 
     # Display user message in chat message container
     with st.chat_message("user"):
@@ -59,11 +59,8 @@ if prompt := st.chat_input("What is up?"):
     product_details = json.loads(open('product/product_details.json').read())
     # # get all the keys
     print(product_details.keys())
-    while flag:
-        # disable chat input
-        st.session_state.messages.append({"role": "assistant", "content": "Choose from the following options"})
-        for i in product_details.keys():
-            st.button(i,on_click = send_model, args = (i,))
+    for i in product_details.keys():
+        st.button(i,on_click = send_model, args = (i,))
 
 
 
