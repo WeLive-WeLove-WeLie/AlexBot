@@ -4,6 +4,8 @@ import pandas as pd
 from scraper import *
 from model import *
 import json
+old_prompt = json.loads(open('config.json').read())["old_prompt"]
+
 
 st.title("AlexBot")
 
@@ -31,7 +33,6 @@ def send_request_to_model(button):
     pass
 
 prompt = ""
-old_prompt = prompt
 st.sidebar.header("Link of the product")
 
 prompt = st.sidebar.text_input("Enter the link of the product",prompt)
@@ -39,6 +40,8 @@ prompt = st.sidebar.text_input("Enter the link of the product",prompt)
 if prompt != "":
     if old_prompt!= prompt:
         print("hello")
+        st.session_state.messages = []
+        st.session_state.messages.append({"role": "assistant", "content": "New link detected. Please wait while we fetch the details."})
         # extracting the product link
         link = prompt[25:]
         link_to_product = []
@@ -51,8 +54,11 @@ if prompt != "":
         # print(link_to_product)
         # getting jsons from the scraper(scraper.py)
         main(link_to_product)
-        st.session_state.messages = []
+        st.session_state.messages.append({"role": "assistant", "content": "Details fetched. Please select the option you want to know about."})
         old_prompt = prompt
+        # save this to config.json
+        with open('config.json', 'w') as f:
+            json.dump({"old_prompt": prompt}, f)
 
     # with st.chat_message("user"):
         # st.markdown(prompt)
