@@ -4,6 +4,7 @@ import pandas as pd
 from scraper import *
 from model import *
 import json
+
 old_prompt = json.loads(open('config.json').read())["old_prompt"]
 
 
@@ -16,29 +17,26 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 
-# Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+
 
 
 def send_model(button):
     st.session_state.messages.append({"role": "user", "content": button})
     if button=="specifications":
-        st.session_state.messages.append({"role": "assistant", "content": "specifications"})
+        
+
     else:
         product_details = json.loads(open('product/product_details.json').read())
         st.session_state.messages.append({"role": "assistant", "content": product_details[button]})
-def send_request_to_model(button):
-    pass
 
 prompt = ""
 st.sidebar.header("Link of the product")
 
 prompt = st.sidebar.text_input("Enter the link of the product",prompt)
 
-if prompt != "":
+if prompt != "" :
     if old_prompt!= prompt:
+
         print("hello")
         st.session_state.messages = []
         st.session_state.messages.append({"role": "assistant", "content": "New link detected. Please wait while we fetch the details."})
@@ -59,7 +57,11 @@ if prompt != "":
         # save this to config.json
         with open('config.json', 'w') as f:
             json.dump({"old_prompt": prompt}, f)
+    # Display chat messages from history on app rerun
 
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
     # with st.chat_message("user"):
         # st.markdown(prompt)
 
@@ -73,9 +75,10 @@ if prompt != "":
     # # get all the keys
     # print(product_details.keys())
     for i in product_details.keys():
-        st.button(i,on_click = send_model, args = (i,))
-
-
+        st.button(i,on_click = send_model, args = (i,flag,f2))
+else:
+    with st.chat_message("assistant"):
+        st.markdown("Please enter the link of the product.")
 
 
 
