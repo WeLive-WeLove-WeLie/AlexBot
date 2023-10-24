@@ -21,7 +21,7 @@ for message in st.session_state.messages:
 
 
 def send_model(button):
-    st.session_state.messages.append({"role": "assistant", "content": "You clicked: " + button})
+    st.session_state.messages.append({"role": "user", "content": button})
     if button=="specifications":
         st.session_state.messages.append({"role": "assistant", "content": "specifications"})
     else:
@@ -30,35 +30,42 @@ def send_model(button):
 def send_request_to_model(button):
     pass
 
+prompt = ""
+old_prompt = prompt
+st.sidebar.header("Link of the product")
 
+prompt = st.sidebar.text_input("Enter the link of the product",prompt)
 
-# Accept user input
-if prompt := st.chat_input("What is up?"):
+if prompt != "":
+    if old_prompt!= prompt:
+        print("hello")
+        # extracting the product link
+        link = prompt[25:]
+        link_to_product = []
+        for i in link:
+            if i == '?':
+                break
+            else:
+                link_to_product.append(i)
+        link_to_product = "".join(link_to_product)
+        # print(link_to_product)
+        # getting jsons from the scraper(scraper.py)
+        main(link_to_product)
+        st.session_state.messages = []
+        old_prompt = prompt
 
-
-    # Display user message in chat message container
-    with st.chat_message("user"):
-        st.markdown(prompt)
+    # with st.chat_message("user"):
+        # st.markdown(prompt)
 
     # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    # extracting the product link
-    link = prompt[25:]
-    link_to_product = []
-    for i in link:
-        if i == '?':
-            break
-        else:
-            link_to_product.append(i)
-    link_to_product = "".join(link_to_product)
-    # print(link_to_product)
-    # getting jsons from the scraper(scraper.py)
-    main(link_to_product)
+    # st.session_state.messages.append({"role": "user", "content": prompt})
+
+
     # #
     # # # getting the initial options for user
     product_details = json.loads(open('product/product_details.json').read())
     # # get all the keys
-    print(product_details.keys())
+    # print(product_details.keys())
     for i in product_details.keys():
         st.button(i,on_click = send_model, args = (i,))
 
@@ -84,11 +91,11 @@ if prompt := st.chat_input("What is up?"):
 
 
 
-    # Display bot message in chat message container
-    # botmsg = "I'm good, thanks!"  # Add your bot response here
-    # with st.chat_message('assistant'):
-    #     st.markdown("I'm good, thanks!")
-    #
-    # # Add bot message to chat history
-    # st.session_state.messages.append({"role": 'assistant', "content": botmsg})
+# Display bot message in chat message container
+# botmsg = "I'm good, thanks!"  # Add your bot response here
+# with st.chat_message('assistant'):
+#     st.markdown("I'm good, thanks!")
+#
+# # Add bot message to chat history
+# st.session_state.messages.append({"role": 'assistant', "content": botmsg})
 
