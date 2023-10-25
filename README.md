@@ -16,6 +16,7 @@ streamlit run trial.py
 ```
 
 ## Usage
+Enter the OpenAI key in config.json
 The bot will ask you to enter a link to a Flipkart product. After entering the link, the bot will also ask you to enter a question. After entering the question, the bot will answer the question based on the product details.
 
 ## Technologies Used
