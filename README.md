@@ -27,3 +27,5 @@ The bot will ask you to enter a link to a Flipkart product. After entering the l
 
 ## Demo
 ![Demo Image of the app](./AlexBot.png)
+
+You can see a demo video at https://drive.google.com/file/d/1WWrpCHnTPK_VYi6JUBkzyHV-m8SODNzI/view?usp=sharing
