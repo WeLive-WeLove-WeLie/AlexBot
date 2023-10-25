@@ -23,3 +23,6 @@ The bot will ask you to enter a link to a Flipkart product. After entering the l
 - Streamlit
 - OpenAI
 - BeautifulSoup4
+
+## Demo
+![Demo Image of the app](./AlexBot.png)
